@@ -1,9 +1,18 @@
-import { fromEvent } from "rxjs";
-
+import {
+    from,
+    fromEvent,
+    switchMap,
+    tap,
+} from "rxjs";
 
 function ready() {
-    fromEvent(document, 'DOMContentLoaded')
-        .subscribe(() => console.log('DOM Loaded'))
+    const observerFromArray = from([1, 2, 3, 4])
+
+    fromEvent(document, 'DOMContentLoaded').pipe(
+        tap(() => console.log('Dom is loaded')),
+        switchMap(() => observerFromArray)
+    ).subscribe(element => console.log(element))
+
 }
 
 ready()
