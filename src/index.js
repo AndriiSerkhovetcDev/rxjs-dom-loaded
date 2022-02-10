@@ -1,4 +1,5 @@
 import {
+    delay,
     from,
     fromEvent,
     switchMap,
@@ -10,9 +11,9 @@ function ready() {
 
     fromEvent(document, 'DOMContentLoaded').pipe(
         tap(() => console.log('Dom is loaded')),
+        delay(5000),
         switchMap(() => observerFromArray)
     ).subscribe(element => console.log(element))
-
 }
 
 ready()
